@@ -12,7 +12,7 @@ class UserTransation extends StatefulWidget {
 class _UserTransationState extends State<UserTransation> {
   int count;
   final List<Transaction> _userTransations = [
-    Transaction('t1', 'New Shows', 69.99, DateTime.now()),
+    Transaction('t1', 'New Shows', 69.70, DateTime.now()),
     Transaction('t2', 'Weekly Groceries', 16.54, DateTime.now()),
   ];
 
