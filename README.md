@@ -1,16 +1,5 @@
-# expenses
+# Expenses
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+A Flutter project.
+---
+This is the app, where we can add new expenses like our personal expenses tracker , like a couple of shirts here for ₹1000 maybe, where we can then also choose a date on which we had this expense and then this gets not only added to this list but also we have this little chart here at the top which is calculated and filled dynamically to show us on the last seven days how much we spent on each day of our total spendings and this updates with every new transaction we added, with every transaction we remove as you can see. Also we have this scrollable list here to display our transactions and the overall scrollable page.
