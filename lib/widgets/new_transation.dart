@@ -1,12 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class NewTransation extends StatelessWidget {
-  String titleInput, amountInput;
-
-
+class NewTransation extends StatefulWidget {
   final Function addTx;
+
   NewTransation(this.addTx);
+
+  @override
+  _NewTransationState createState() => _NewTransationState();
+}
+
+class _NewTransationState extends State<NewTransation> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
+
+  void submitData() {
+    final enteredTitle = titleController.text;
+    final enteredAmount = double.parse(amountController.text);
+
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+      return;
+    }
+    widget.addTx(titleController.text, double.parse(amountController.text));
+    Navigator.of(context)
+        .pop(); //to close the bottom sheet after we enter the data
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,18 +37,16 @@ class NewTransation extends StatelessWidget {
           children: [
             TextField(
               decoration: InputDecoration(labelText: 'Title'),
-              onChanged: (value) {
-                titleInput = value;
-              },
+              controller: titleController,
             ),
             TextField(
               decoration: InputDecoration(labelText: 'Amount'),
-              onChanged: (value) => amountInput = value,
+              controller: amountController,
+              keyboardType: TextInputType.datetime,
+              onSubmitted: (_) => submitData(),
             ),
             FlatButton(
-              onPressed: () {
-                addTx(titleInput,double.parse(amountInput));
-              },
+              onPressed: submitData,
               child: Text('Add Transaction'),
               textColor: Colors.purple,
             )
