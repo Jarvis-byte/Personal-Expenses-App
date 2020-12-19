@@ -1,3 +1,4 @@
+import 'package:expenses/widgets/chart.dart';
 import 'package:expenses/widgets/new_transation.dart';
 import 'package:expenses/widgets/transaction_list.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,9 +43,17 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransations = [
-    Transaction('t1', 'New Shows', 69.70, DateTime.now()),
-    Transaction('t2', 'Weekly Groceries', 16.54, DateTime.now()),
+    Transaction('t1', 'New Shows', 1800, DateTime.now()),
+    Transaction('t2', 'Weekly Groceries', 180, DateTime.now()),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _userTransations.where((element) {
+      return element.date.isAfter(DateTime.now().subtract(
+        Duration(days: 7),
+      ));
+    }).toList();
+  }
 
   void _addNewTransation(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -86,17 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                child: Text('Chart!'),
-                elevation: 5,
-              ),
-            ),
-            TransactionList(_userTransations)
-          ],
+          children: [Chart(_recentTransactions), TransactionList(_userTransations)],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
