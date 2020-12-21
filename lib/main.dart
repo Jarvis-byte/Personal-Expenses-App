@@ -55,9 +55,9 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransation(String txTitle, double txAmount,DateTime chosenDate) {
-    final newTx = Transaction(
-        DateTime.now().toString(), txTitle, txAmount, chosenDate);
+  void _addNewTransation(String txTitle, double txAmount, DateTime chosenDate) {
+    final newTx =
+        Transaction(DateTime.now().toString(), txTitle, txAmount, chosenDate);
     setState(() {
       _userTransations.add(newTx);
     });
@@ -72,6 +72,14 @@ class _MyHomePageState extends State<MyHomePage> {
             behavior: HitTestBehavior.opaque,
           );
         });
+  }
+
+  void deleteTransaction(String id) {
+    setState(() {
+      _userTransations.removeWhere((tx) {
+        return tx.id == id;
+      });
+    });
   }
 
   @override
@@ -92,10 +100,16 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [Chart(_recentTransactions), TransactionList(_userTransations)],
+        child: Container(
+          color: Colors.black38,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+
+              Chart(_recentTransactions),
+              TransactionList(_userTransations,deleteTransaction)
+            ],
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
